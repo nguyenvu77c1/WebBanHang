@@ -1,0 +1,183 @@
+﻿@model GioHang
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <title>Product Card</title>
+</head>
+<body>
+    <div class="card">
+        <div class="left">
+
+            <div class="left__bottom">
+            </div>
+
+            <div class="left__top">
+                <img class="helmet" src="~/images/@Model.Product.ImageUrl" alt="helmet" />
+                <div class="content">
+                    <h2>@Model.Product.Name</h2>
+                    <h3 class="content__price">@String.Format("{0:#,##0}", @Model.Product.Price) VNĐ</h3>
+
+                    <div class="option">
+                        <div class="option__color">
+                            <img src="~/images/1.png" alt="Màu sắc">
+                            <div class="color__content">
+                                <p>@String.Format("{0:#,##0}", 7050000) VNĐ</p>
+                                <p>Đen</p>
+                            </div>
+                        </div>
+
+                        <div class="option__color">
+                            <img src="~/images/66.png" alt="Màu sắc">
+                            <div class="color__content">
+                                <p>@String.Format("{0:#,##0}", 7050000) VNĐ</p>
+                                <p>Trắng</p>
+                            </div>
+                        </div>
+
+                        <div class="option__color">
+                            <img src="~/images/33.png" alt="Màu sắc">
+                            <div class="color__content">
+                                <p>@String.Format("{0:#,##0}", 7050000) VNĐ</p>
+                                <p>Xanh</p>
+                            </div>
+                        </div>
+
+                        <div class="option__color">
+                            <img src="~/images/5.png" alt="Màu sắc">
+                            <div class="color__content">
+                                <p>@String.Format("{0:#,##0}", 7050000) VNĐ</p>
+                                <p>Vàng</p>
+                            </div>
+                        </div>
+
+                        <div class="option__color">
+                            <img src="~/images/4.png" alt="Màu sắc">
+                            <div class="color__content">
+                                <p>@String.Format("{0:#,##0}", 7050000) VNĐ</p>
+                                <p>Tím</p>
+                            </div>
+                        </div>
+
+                        <div class="option__color">
+                            <img src="~/images/2.png" alt="Màu sắc">
+                            <div class="color__content">
+                                <p>@String.Format("{0:#,##0}", 7050000) VNĐ</p>
+                                <p>Đỏ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form asp-controller="Product" asp-action="Display" method="post">
+                        <div class="row justify-content-center">
+                            <div class="col-auto text-center">
+                                <!-- Hidden input for product ID -->
+                                <input type="hidden" name="productId" value="@Model.Product.Id">
+
+                                <!-- Quantity -->
+
+                                <ul class="list-inline ">
+                                    <li class="list-inline-item">
+                                        <button type="button" class="btn btn-success" id="btn-minus">-</button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <input type="number" class="form-control" id="productQuantity" name="productQuantity" value="1" style="width: 70px;">
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button type="button" class="btn btn-success" id="btn-plus">+</button>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="action">
+                            <div class="col d-grid">
+                                <!-- Buy -->
+                                <button type="submit" class="btn buy-now" name="submit" value="buy">Buy</button>
+                            </div>
+                            <div class="col d-grid">
+                                <!-- Add to Cart -->
+                                <button type="submit" class="btn add-to-cart"><span>Add to cart</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="right">
+            <div class="right__head">
+                <h3>CẤU HÌNH</h3>
+            </div>
+
+            <div class="right__body">
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>Thông tin</th>
+                            <th>Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <tr>
+                            <td>Màn hình</td>
+                            <td>@Model.Product.Configs.ManHinh</td>
+                        </tr>
+                        <tr>
+                            <td>Hệ điều hành</td>
+                            <td>@Model.Product.Configs.HeDieuHanh</td>
+                        </tr>
+                        <tr>
+                            <td>Camera sau</td>
+                            <td>@Model.Product.Configs.CameraSau</td>
+                        </tr>
+                        <tr>
+                            <td>Camera trước</td>
+                            <td>@Model.Product.Configs.CameraTruoc</td>
+                        </tr>
+                        <tr>
+                            <td>CPU</td>
+                            <td>@Model.Product.Configs.CPU</td>
+                        </tr>
+                        <tr>
+                            <td>RAM</td>
+                            <td>@Model.Product.Configs.Ram</td>
+                        </tr>
+                        <tr>
+                            <td>Bộ nhớ trong</td>
+                            <td>@Model.Product.Configs.BoNhoTrong</td>
+                        </tr>
+                        <tr>
+                            <td>Thẻ SIM</td>
+                            <td>@Model.Product.Configs.Sim</td>
+                        </tr>
+                        <tr>
+                            <td>Dung lượng pin</td>
+                            <td>@Model.Product.Configs.DungLuong</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="similar-images">
+        <img src="~/images/1.png" alt="Hình ảnh khác">
+        <img src="~/images/33.png" alt="Hình ảnh khác">
+        <img src="~/images/2.png" alt="Hình ảnh khác">
+        <img src="~/images/5.png" alt="Hình ảnh khác">
+
+    </div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HoaDon>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Tên khách hàng</th>
+                <th>Địa chỉ</th>
+                <th>Ngày mua</th>
+                <th>Trạng thái đơn hàng</th>
+                <th>Dịch vụ vận chuyển</th>
+                <th>Tổng cộng</th>
+                <th>Chú ý</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    
+                    <td>@item.Name</td>
+                    <td>@item.Address</td>
+                    <td>@item.OrderDate</td>
+                    <td>@item.OrderStatus</td>
+                    <td>@item.ShippingAddress</td>
+                    <td>@string.Format("{0:#,##0}", item.Total)</td>
+                    <td>@item.Note</td>
+                    <td>
+                        <a href="~/Admin/DonHang/ChiTietDonHang">Chi tiết đơn hàng</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

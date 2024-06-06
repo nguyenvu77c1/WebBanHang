@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Lab03.Models.ApplicationUser>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>UserName</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.UserName</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Address</td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

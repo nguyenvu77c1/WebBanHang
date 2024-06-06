@@ -1,0 +1,107 @@
+﻿@model Lab03.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h2>Thêm sản phẩm mới</h2>
+
+<form asp-action="Add" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name">Tên</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Giá</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Mô tả</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Category">Thể loại</label>
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control" id="category-select"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Brand">Thương hiệu</label>
+        <input asp-for="Brand" class="form-control" id="brand-select"></input>
+        <span asp-validation-for="Brand" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="ImageUrl">Hình ảnh</label>
+        <input type="file" asp-for="ImageUrl" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Color">Màu sắc</label>
+        <input asp-for="Color" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    @* Cấu hình *@
+    <div class="form-group">
+        <label asp-for="Configs.ManHinh">Màn hình</label>
+        <input asp-for="Configs.ManHinh" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Configs.HeDieuHanh">Hệ điều hành</label>
+        <input asp-for="Configs.HeDieuHanh" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+     <div class="form-group">
+        <label asp-for="Configs.CameraSau">CameraSau</label>
+        <input asp-for="Configs.CameraSau" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Configs.CameraTruoc">CameraTruoc</label>
+        <input asp-for="Configs.CameraTruoc" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Configs.CPU">CPU</label>
+        <input asp-for="Configs.CPU" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Configs.Ram">Ram</label>
+        <input asp-for="Configs.Ram" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Configs.BoNhoTrong">Bộ nhớ trong</label>
+        <input asp-for="Configs.BoNhoTrong" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Configs.Sim">Sim</label>
+        <input asp-for="Configs.Sim" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Configs.DungLuong">Dung lượng</label>
+        <input asp-for="Configs.DungLuong" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+     
+    <button type="submit" class="btn btn-primary">Add</button>
+    <button asp-action="Index" class="btn btn-primary">Hủy</button>
+</form>

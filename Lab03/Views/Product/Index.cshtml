@@ -1,0 +1,234 @@
+﻿@model IEnumerable<Lab03.Models.Product>
+
+
+
+@{
+    if (TempData["SuccessMessage"] != null)
+    {
+        <div id="success-alert" class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+
+    .custom-card {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .fixed-card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 200px;
+        align-items: center;
+    }
+
+    .card-body-name,
+    .card-body-price,
+    .card-body-btn {
+        width: 100%; 
+    }
+
+
+    .card-body > * {
+        margin-bottom: 10px;
+    }
+
+    .btn-buy-now {
+        position: center;
+        bottom: 20px;
+        width: 50%;
+    }
+
+    .price {
+        margin: 10px;
+    }
+
+    .product-card {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        height: 330px;
+        transition: background-color 0.3s ease;
+    }
+
+        .product-card:hover img {
+            transform: translateY(-45px) scale(1.2);
+            transition: transform 0.9s ease;
+        }
+
+
+        .product-card:hover {
+            background-color: #3f3f3f;
+            transition: background-color 0.9s ease;
+        }
+
+    .img {
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .product-card img {
+        transition: transform 0.7s ease;
+        z-index: 3
+    }
+
+    .radio-bd {
+        border-radius: 20px !important;
+        flex-direction: column;
+        display: flex;
+    }
+
+    .box_sd {
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .product-item {
+        position: absolute;
+        top: 10px;
+        left: -4px;
+        color: #EE4D2D;
+        background-color: currentColor;
+        font-size: 1.3rem;
+        font-weight: 500;
+        line-height: 2rem;
+        padding-right: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+        .product-item::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5.8px;
+            border-top: 6px solid currentColor;
+            border-left: 6px solid transparent;
+            filter: brightness(60%);
+        }
+
+        .product-item i {
+            color: white;
+            font-size: 1rem;
+            margin: 0 -1px 0 4px;
+            margin: 0 10px;
+        }
+
+        .product-item span {
+            font-size: 15px;
+            color: white;
+            margin: 0 5px 0 0;
+        }
+
+    .cart-body-name, .cart-body-price {
+        margin: 0;
+    }
+
+    .heart_item {
+        color: inherit;
+        text-decoration: none;
+        cursor: default;
+    }
+
+        .heart_item:hover {
+            cursor: pointer;
+        }
+
+    .start_item {
+        color: red;
+    }
+
+    .card-img {
+        padding-bottom: 30px;
+        height: 350px;
+        object-fit: cover;
+    }
+</style>
+
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-3" style="margin-bottom: 50px;">
+            @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+            {
+                <div class="input-group box_sd">
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", placeholder = "Tìm sản phẩm..." })
+                    <button type="submit" class="btn btn-primary" style="border-radius: 5px; margin-left:20px">Tìm kiếm</button>
+                </div>
+            }
+        </div>
+
+        <div class="col-lg-3" style="margin-bottom: 50px;">
+            @await Component.InvokeAsync("Category")
+        </div>
+
+        <div class="container">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="radio-bd card mb-4 box_sd">
+                            <div class="radio-bd card rounded-0 product-card" style="border:0px">
+                                <a asp-action="Display" asp-route-productId="@product.Id">
+                                    <img class="radio-bd card-img rounded-0 img-fluid" src="~/images/@product.ImageUrl">
+                                    <div class="radio-bd card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            <!-- Đây là các nút thao tác, bạn có thể thêm vào sau này nếu cần -->
+                                        </ul>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body text-center fixed-card-body">
+                                <div class="cart-body-name">
+                                    <a asp-action="Display" asp-route-productId="@product.Id" class="h5 text-decoration-none" style="font-weight:800!important;color:#000;margin-bottom:0">
+                                        @Html.DisplayFor(modelItem => product.Name)
+                                    </a>
+                                </div>
+                                <div class="cart-body-price">
+                                    <span class="text-decoration-none" style="font-weight: 800; font-size: 20px; font-size: 700; color: #d70018;">
+                                        @String.Format("{0:#,##0}", product.Price) VNĐ
+                                    </span>
+                                </div>
+                                <div class="cart-body-price">
+                                    <span class="text-decoration-none" style="font-weight: 400; font-size: 16px; font-size: 700; color: #777;">
+                                        giá cũ VNĐ
+                                    </span>
+                                </div>
+                                <div>
+                                    <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                        <li>
+                                            <i class="fa-solid fa-star start_item"></i>
+                                            <i class="fa-solid fa-star start_item"></i>
+                                            <i class="fa-solid fa-star start_item"></i>
+                                            <i class="fa-solid fa-star start_item"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <a href="#" class="fa-regular fa-heart heart_item"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-item">
+                                    <span class="sticker-icon"><i class="fas fa-fire"></i><span>Hàng HOT </span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Tự động ẩn thông báo sau 5 giây (5000 milliseconds)
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#success-alert').fadeOut('slow');
+            }, 3000);
+        });
+    </script>
+}

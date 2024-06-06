@@ -1,0 +1,92 @@
+﻿@model GioHangViewModel
+
+
+
+<section class="h-100 h-custom" style="background-color: #d2c9ff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-lg-8">
+                                <div class="p-5">
+                                    <div class="d-flex justify-content-between align-items-center mb-5">
+                                        <h1 class="fw-bold mb-0 text-black">Giỏ Hàng</h1>
+
+                                        @if (Model == null || !Model.DsGioHang.Any())
+                                        {
+                                            <h6 class="mb-0 text-muted">Your cart is empty.</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6 class="mb-0 text-muted">@Model.DsGioHang.Count() items</h6>
+                                        }
+                                    </div>
+
+                                    @foreach (var item in Model.DsGioHang)
+                                    {
+
+
+                                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                            <div class="col-md-2 col-lg-2 col-xl-2">
+                                                <img class="card-img rounded-0 img-fluid" src="~/images/@item.Product.ImageUrl" alt="@item.Product.Name">
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <h6 class="text-black mb-0">@item.Product.Name</h6>
+                                            </div>
+                                            <div class="col-md-2 d-flex justify-content-center">
+                                                <a class="btn btn-link px-2" asp-action="Giam" asp-route-giohangId="@item.Id">
+                                                    <i class="fas fa-minus"></i>
+                                                </a>
+
+                                                <input id="@($"quantity_{item.Product.Id}")" min="1" name="quantity" value="@item.Quantity" type="number"
+                                                       class="form-control form-control-sm text-center" style="width: 100px;" />
+
+                                                <a class="btn btn-link px-2" asp-action="Tang" asp-route-giohangId="@item.Id">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                <h6 class="mb-0" style="color:red;">@String.Format("{0:#,##0}", item.Product.Price * item.Quantity)</h6>
+                                            </div>
+                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                <a class="text-muted remove-item" asp-action="Xoa" asp-route-giohangId="@item.Id">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <hr class="my-4">
+                                    }
+
+                                    <div class="pt-5">
+                                        <h6 class="mb-0">
+                                            <a asp-controller="Product" asp-action="Index" class="text-body">
+                                                <i class="fas fa-long-arrow-alt-left me-2"></i>Quay về shop
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 bg-grey">
+                                <div class="p-5">
+                                    <h3 class="fw-bold mb-5 mt-2 pt-1">THÀNH TIỀN</h3>
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <h5 class="text-uppercase mb-0 me-5 d-flex align-items-center">Tổng: </h5>
+                                        <p class="mb-0 me-5 d-flex align-items-center">
+                                            <span class="lead fw-normal" style="color:red;">@String.Format("{0:#,##0}", Model.HoaDon.Total)</span>
+                                        </p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <a asp-controller="GioHang" asp-action="ThanhToan" type="button" class="btn btn-primary btn-lg me-2 fw-bold mb-0 text-black" style="background:red;margin:0">THANH TOÁN</a>
+                                        <a asp-controller="Home" asp-action="Index" class="btn btn-light btn-lg me-2">Tiếp tục mua hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

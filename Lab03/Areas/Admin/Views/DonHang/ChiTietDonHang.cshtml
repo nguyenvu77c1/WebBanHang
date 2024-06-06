@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HoaDon>
+
+<div class="container">
+    <h1>Chi tiết hóa đơn</h1>
+
+    @foreach (var item in Model)
+    {
+        <div class="invoice-details">
+            <table class="table">
+                <tr>
+                    <th>Tên khách hàng:</th>
+                    <td>@item.Name</td>
+                </tr>
+                <tr>
+                    <th>Địa chỉ:</th>
+                    <td>@item.Address</td>
+                </tr>
+                <tr>
+                    <th>Ngày mua:</th>
+                    <td>@item.OrderDate</td>
+                </tr>
+                <tr>
+                    <th>Trạng thái đơn hàng:</th>
+                    <td>@item.OrderStatus</td>
+                </tr>
+                <tr>
+                    <th>Dịch vụ vận chuyển:</th>
+                    <td>@item.ShippingAddress</td>
+                </tr>
+                <tr>    
+                    <th>Tổng cộng:</th>
+                    <td>@string.Format("{0:#,##0}", item.Total)</td>
+                </tr>
+                <tr>
+                    <th>Chú ý:</th>
+                    <td>@item.Note</td>
+                </tr>
+            </table>
+        </div>
+        break;
+    }
+</div>

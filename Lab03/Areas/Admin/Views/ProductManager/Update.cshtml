@@ -1,0 +1,54 @@
+﻿@model Lab03.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+<form asp-action="Update" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Giá</label>
+        <input asp-for="Price" class="form-control" value="@String.Format("{0:#,##0}", Model.Price)" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Mô tả</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">Thể loại</label>
+        <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl">Hình ảnh</label>
+        <input type="file" asp-for="ImageUrl" class="form-control" />
+        <img src="@Model.ImageUrl" alt="Product Image" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl">Hiển thị hình ảnh</label>
+        <div><img class="card-img img-fluid" src="~/images/@Model.ImageUrl" alt="Card image cap" id="product-detail" style="max-width: 200px;"></div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Brand">Thương hiệu</label>
+        <input asp-for="Brand" class="form-control" />
+        <span asp-validation-for="Brand" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Color">Màu sắc</label>
+        <input asp-for="Color" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Update</button>
+    <button asp-action="Index" class="btn btn-primary">Hủy</button>
+</form>

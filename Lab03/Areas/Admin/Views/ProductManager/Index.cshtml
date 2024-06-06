@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Lab03.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Quản lý sản phẩm</h1>
+
+<p>
+    <a asp-action="Add" class="btn btn-success">Thêm sản phẩm mới</a>
+    <a href="http://localhost:5167/Home/Index" class="btn btn-primary">Về trang mua hàng</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @String.Format("{0:#,##0}", Html.DisplayNameFor(model => model.Price))
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            
+            <th>
+                Chức năng
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var displayName = item.Name.Length > 15 ? $"{item.Name.Substring(0, 15)}..." : item.Name;
+                    }
+                    @Html.DisplayFor(modelItem => displayName)
+                </td>
+
+                <td>
+                    @String.Format("{0:#,##0}", item.Price)
+                </td>
+
+
+                <td>
+                    @{
+                        var displayDescription = item.Description.Length > 15 ? $"{item.Description.Substring(0, 15)}..." : item.Description;
+                    }
+                    @Html.DisplayFor(modelItem => displayDescription)
+                </td>
+                @*  <td>
+            @{
+            var displayImages = item.ImageUrl.Length > 20 ? $"{item.ImageUrl.Substring(0, 20)}..." : item.ImageUrl;
+            }
+            @Html.DisplayFor(modelItem => displayImages)
+            </td> *@
+                <td>
+                    @{
+                        var displayCategoryName = item.Category.Name.Length > 10 ? $"{item.Category.Name.Substring(0, 10)}..." : item.Category.Name;
+                    }
+                    @Html.DisplayFor(modelItem => displayCategoryName)
+                </td>
+
+                <td>
+                    @{
+                        var displayBrand = item.Brand.Length > 10 ? $"{item.Brand.Substring(0, 10)}..." : item.Brand;
+                    }
+                    @Html.DisplayFor(modelItem => displayBrand)
+                </td>
+                <td>
+                    @{
+                        var displayColor = item.Color.Length > 10 ? $"{item.Color.Substring(0, 10)}..." : item.Color;
+                    }
+                    @Html.DisplayFor(modelItem => displayColor)
+                </td>
+                
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Display" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
